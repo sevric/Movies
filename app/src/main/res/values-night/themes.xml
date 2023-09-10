@@ -11,6 +11,11 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+        <!--Turn off Action Bar-->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!--Turn off Status Bar-->
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>
