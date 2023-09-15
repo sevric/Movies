@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ic_launcher_bg_height">200dp</dimen>
+    <dimen name="ic_launcher_bg_width">133dp</dimen>
+    <dimen name="ed_enter_search_query_text_size">35sp</dimen>
+    <dimen name="search_et_padding">8dp</dimen>
+    <dimen name="search_et_padding_end">0dp</dimen>
+    <dimen name="search_et_padding_start">28dp</dimen>
+    <dimen name="search_iv_padding">16dp</dimen>
+    <dimen name="search_iv_padding_end">28dp</dimen>
+    <dimen name="search_iv_padding_start">16dp</dimen>
+    <dimen name="search_iv_width">82dp</dimen>
+    <dimen name="home_scroll_margin_end">16dp</dimen>
+    <dimen name="home_scroll_margin_start">16dp</dimen>
+    <dimen name="home_spinner_padding_end">30dp</dimen>
+    <dimen name="home_spinner_padding_start">10dp</dimen>
+    <dimen name="home_spinner_title_side_padding">0dp</dimen>
+    <dimen name="home_title_side_padding">12dp</dimen>
+    <dimen name="home_title_text_size">20sp</dimen>
+    <dimen name="most_popular_rv_height">350dp</dimen>
+    <dimen name="scroll_ll_margin_bottom">16dp</dimen>
+</resources>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.ui.HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_searchLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_enterSearchQuery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/hint_search_field"
+            android:padding="@dimen/search_et_padding"
+            android:paddingStart="@dimen/search_et_padding_start"
+            android:paddingEnd="@dimen/search_et_padding_end"
+            android:textSize="@dimen/ed_enter_search_query_text_size" />
+
+        <ImageView
+            android:id="@+id/iv_btnStartSearching"
+            android:layout_width="@dimen/search_iv_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center"
+            android:contentDescription="@string/description_iv_btn_start_searching"
+            android:padding="@dimen/search_iv_padding"
+            android:paddingStart="@dimen/search_iv_padding_start"
+            android:paddingEnd="@dimen/search_iv_padding_end"
+            android:scaleType="centerCrop"
+            android:src="@drawable/search_icon" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/home_scroll_margin_start"
+        android:layout_marginEnd="@dimen/home_scroll_margin_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_searchLine">
+
+        <LinearLayout
+            android:id="@+id/ll_inScrollablePart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/scroll_ll_margin_bottom"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/home_title_side_padding"
+                    android:paddingEnd="@dimen/home_title_side_padding"
+                    android:text="@string/title_part_most_popular"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/home_title_text_size"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_mostPopularMovies"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/most_popular_rv_height"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:contentDescription="@string/description_rv_most_popular_movies_list"
+                    tools:itemCount="20"
+                    tools:spanCount="2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nowInTheTheaters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/scroll_ll_margin_bottom"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/home_title_side_padding"
+                    android:paddingEnd="@dimen/home_title_side_padding"
+                    android:text="@string/title_part_now_in_the_theaters"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/home_title_text_size"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_nowInTheTheaters"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:contentDescription="@string/description_rv_now_in_the_theaters_list"
+                    tools:itemCount="20"
+                    tools:orientation="horizontal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_highlightedPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/scroll_ll_margin_bottom"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_titleHighlightedPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/home_title_side_padding"
+                        android:paddingEnd="@dimen/home_spinner_title_side_padding"
+                        android:text="@string/title_start_highlighted_period_spinner"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spinner_timePeriod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/description_spinner_choose_period"
+                        android:paddingStart="@dimen/home_spinner_padding_start"
+                        android:paddingEnd="@dimen/home_spinner_padding_end"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_end_highlighted_period_spinner"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/home_title_text_size"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_highlightedPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/description_rv_movies_by_period"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="20"
+                    tools:orientation="horizontal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_forKids"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/scroll_ll_margin_bottom"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/home_title_side_padding"
+                    android:paddingEnd="@dimen/home_title_side_padding"
+                    android:text="@string/title_part_for_kids"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/home_title_text_size"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_forKids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:contentDescription="@string/description_rv_movies_for_kids"
+                    tools:itemCount="20"
+                    tools:orientation="horizontal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
