@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.FavouritesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_blue"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/title_favourites"
+            android:textColor="@color/black"
+            android:textSize="@dimen/page_title_text_size"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_favourites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/single_rv_side_padding"
+            android:paddingEnd="@dimen/single_rv_side_padding"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:itemCount="20"
+            tools:spanCount="2" />
+
+    </LinearLayout>
+</LinearLayout>
