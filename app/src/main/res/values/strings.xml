@@ -19,6 +19,8 @@
     <string name="title_part_now_in_the_theaters">Now in the theaters</string>
     <string name="title_start_highlighted_period_spinner">Last</string>
     <string name="title_end_highlighted_period_spinner">highlighted</string>
+    <string name="title_genres">G E N R E S</string>
+
 
     <!--Hint texts-->
     <string name="hint_search_field">search movies…</string>
