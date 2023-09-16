@@ -45,6 +45,8 @@
         Overview text itself in a very, very, very long version
     </string>
     <string name="btn_tv_see_movie_details">See movie details…</string>
+    <string name="title_prefix_movies_by_genre">Genre: </string>
+    <string name="title_default_genre_name">Default genre name</string>
 
     <!--Hint texts-->
     <string name="hint_search_field">search movies…</string>
