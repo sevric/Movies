@@ -12,6 +12,10 @@
     <string name="description_spinner_choose_period">
         Choose period of recent popular movies
     </string>
+    <string name="description_open_movies_of_this_genre">Open movies of this genre</string>
+    <string name="description_genre_image">Genre image</string>
+    <string name="description_open_the_movie_info">Open the movie info</string>
+    <string name="description_movie_poster">Movie poster</string>
 
     <!--Views texts-->
     <string name="title_part_for_kids">For kids</string>

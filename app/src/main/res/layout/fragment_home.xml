@@ -79,9 +79,10 @@
                     android:id="@+id/rv_mostPopularMovies"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/most_popular_rv_height"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:contentDescription="@string/description_rv_most_popular_movies_list"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     tools:itemCount="20"
+                    tools:listitem="@layout/grid_recycler_item"
                     tools:spanCount="2" />
 
             </LinearLayout>
@@ -108,9 +109,10 @@
                     android:id="@+id/rv_nowInTheTheaters"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:contentDescription="@string/description_rv_now_in_the_theaters_list"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="20"
+                    tools:listitem="@layout/linear_recycler_item"
                     tools:orientation="horizontal" />
 
             </LinearLayout>
@@ -147,7 +149,8 @@
                         android:contentDescription="@string/description_spinner_choose_period"
                         android:paddingStart="@dimen/home_spinner_padding_start"
                         android:paddingEnd="@dimen/home_spinner_padding_end"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dropdown"
+                        tools:listitem="@layout/spinner_item_custom" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -166,6 +169,7 @@
                     android:contentDescription="@string/description_rv_movies_by_period"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="20"
+                    tools:listitem="@layout/linear_recycler_item"
                     tools:orientation="horizontal" />
 
             </LinearLayout>
@@ -192,9 +196,10 @@
                     android:id="@+id/rv_forKids"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:contentDescription="@string/description_rv_movies_for_kids"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="20"
+                    tools:listitem="@layout/linear_recycler_item"
                     tools:orientation="horizontal" />
 
             </LinearLayout>

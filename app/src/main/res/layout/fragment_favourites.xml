@@ -31,6 +31,7 @@
             android:paddingEnd="@dimen/single_rv_side_padding"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:itemCount="20"
+            tools:listitem="@layout/grid_recycler_item"
             tools:spanCount="2" />
 
     </LinearLayout>

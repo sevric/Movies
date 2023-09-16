@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/rv_item_card_margin"
+    android:contentDescription="@string/description_open_the_movie_info"
+    app:cardCornerRadius="@dimen/rv_item_card_corner_radius"
+    tools:context=".presentation.ui.MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="150dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_itemPoster"
+            android:layout_width="@dimen/zero_size"
+            android:layout_height="@dimen/rv_item_image_height"
+            android:contentDescription="@string/description_movie_poster"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toTopOf="@+id/tv_itemName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_itemName"
+            android:layout_width="@dimen/zero_size"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/rv_item_text_side_margin"
+            android:layout_marginEnd="@dimen/rv_item_text_side_margin"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/rv_item_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_itemPoster"
+            tools:text="Default movie title in a very very very long version of its name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
