@@ -32,5 +32,21 @@
     <dimen name="rv_item_text_side_margin">12dp</dimen>
     <dimen name="rv_item_text_size">14sp</dimen>
     <dimen name="spinner_item_text_size">20sp</dimen>
+    <dimen name="app_bar_height">300dp</dimen>
+    <dimen name="fragment_movie_app_bar_iv_min_height">500dp</dimen>
+    <dimen name="floating_btn_side_margin">16dp</dimen>
+    <dimen name="movie_details_container_padding">16dp</dimen>
+    <dimen name="movie_details_rating_title_margin_top">20dp</dimen>
+    <dimen name="movie_details_primary_text_size">16sp</dimen>
+    <dimen name="movie_details_values_margin_start">8dp</dimen>
+    <dimen name="movie_details_overview_title_margin_top">16dp</dimen>
+    <dimen name="movie_details_overview_title_text_size">20sp</dimen>
+    <dimen name="movie_details_overview_value_margin_top">8dp</dimen>
+    <dimen name="movie_details_overview_value_text_size">16sp</dimen>
+    <dimen name="movie_details_youtube_btn_width">75dp</dimen>
+    <dimen name="movie_details_youtube_btn_height">50dp</dimen>
+    <dimen name="movie_details_youtube_btn_margin_bottom">16dp</dimen>
+    <dimen name="bookmark_dimension">40dp</dimen>
+    <dimen name="favourite_heart_dimension">24dp</dimen>
 
 </resources>

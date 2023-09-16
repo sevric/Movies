@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/bookmark_dimension"
+    android:height="@dimen/bookmark_dimension"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@color/black"
+        android:pathData="M0,0L0,24L12,18L24,24L24,0zM21,0L21,19L12,14L3,19L3,0z" />
+    <path
+        android:fillColor="@color/black"
+        android:pathData="zM21,0L21,19L12,14L3,19L3,0z" />
+</vector>

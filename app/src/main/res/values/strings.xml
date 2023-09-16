@@ -16,6 +16,9 @@
     <string name="description_genre_image">Genre image</string>
     <string name="description_open_the_movie_info">Open the movie info</string>
     <string name="description_movie_poster">Movie poster</string>
+    <string name="description_btn_add_to_see_later">Button to add to watch later list</string>
+    <string name="description_btn_add_to_favorites">Button to add to favorites</string>
+    <string name="description_btn_trailer_watch">Search trailers on YouTube button</string>
 
     <!--Views texts-->
     <string name="title_part_for_kids">For kids</string>
@@ -28,6 +31,19 @@
     <string name="btn_login">Login</string>
     <string name="btn_tv_forgot_your_password">Forgot your password?</string>
     <string name="btn_tv_register">Register</string>
+    <string name="movie_default_title">No movie name found from API</string>
+    <string name="rating_title">Popularity:</string>
+    <string name="rating_default_value">9.9</string>
+    <string name="title_year_of_issue">Premiere:</string>
+    <string name="year_of_issue_default_value">2222</string>
+    <string name="title_genre_list">Genres:</string>
+    <string name="genre_list_default">
+        Dramedy, one more default genre, and more, and once more
+    </string>
+    <string name="title_overview">Overview:</string>
+    <string name="overview_text_itself_value">
+        Overview text itself in a very, very, very long version
+    </string>
 
     <!--Hint texts-->
     <string name="hint_search_field">search movies…</string>
