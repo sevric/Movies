@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/secondary_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@id/homeFragment"
+        android:name="com.severin.movies.presentation.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@id/genresFragment"
+        android:name="com.severin.movies.presentation.ui.GenresFragment"
+        android:label="fragment_genres"
+        tools:layout="@layout/fragment_genres" />
+
+    <fragment
+        android:id="@id/favouritesFragment"
+        android:name="com.severin.movies.presentation.ui.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" />
+
+    <fragment
+        android:id="@id/accountFragment"
+        android:name="com.severin.movies.presentation.ui.LoginFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_login" />
+
+</navigation>

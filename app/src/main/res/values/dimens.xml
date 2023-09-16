@@ -52,5 +52,9 @@
     <dimen name="bottom_sheet_elements_margin">5dp</dimen>
     <dimen name="bottom_sheet_significant_text_size">18sp</dimen>
     <dimen name="bottom_sheet_small_icon_dimension">18dp</dimen>
+    <dimen name="home_nav_icon_dimension">24dp</dimen>
+    <dimen name="genres_nav_icon_dimension">68dp</dimen>
+    <dimen name="favourites_nav_icon_dimension">128dp</dimen>
+    <dimen name="account_circle_dimension">24dp</dimen>
 
 </resources>

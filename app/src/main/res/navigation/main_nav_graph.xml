@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainNavigationFragment">
+
+    <fragment
+        android:id="@+id/mainNavigationFragment"
+        android:name="com.severin.movies.presentation.ui.MainNavigationFragment"
+        android:label="BottomNavigationFragment"
+        tools:layout="@layout/fragment_main_navigation"/>
+
+    <fragment
+        android:id="@+id/fullScreenFragment"
+        android:name="com.severin.movies.presentation.ui.MovieFragment"
+        android:label="FullScreenFragment"
+        tools:layout="@layout/fragment_movie" >
+        <deepLink app:uri="android-app://com.severin.movies.presentation.ui.MovieFragment" />
+        <action
+            android:id="@+id/action_fullScreenFragment_to_bottomNavigationFragment"
+            app:destination="@id/mainNavigationFragment" />
+    </fragment>
+
+</navigation>

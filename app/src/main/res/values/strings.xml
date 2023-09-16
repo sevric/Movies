@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Movies</string>
 
+    <!--Navigation page titles-->
+    <string name="nav_title_home">Home</string>
+    <string name="nav_title_genres">Genres</string>
+    <string name="nav_title_favourite">Favourite</string>
+    <string name="nav_title_account">Account</string>
+
     <!--Images descriptions-->
     <string name="description_iv_btn_start_searching">start searching</string>
     <string name="description_rv_most_popular_movies_list">Most popular movies list</string>
