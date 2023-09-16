@@ -21,7 +21,13 @@
     <string name="title_end_highlighted_period_spinner">highlighted</string>
     <string name="title_genres">G E N R E S</string>
     <string name="title_favourites">F A V O U R I T E S</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_tv_forgot_your_password">Forgot your password?</string>
+    <string name="btn_tv_register">Register</string>
 
     <!--Hint texts-->
     <string name="hint_search_field">search movies…</string>
+    <string name="hint_enter_your_email">Enter your email</string>
+    <string name="hint_enter_your_password">Enter your password</string>
+
 </resources>
