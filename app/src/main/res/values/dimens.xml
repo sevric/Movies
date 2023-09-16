@@ -48,5 +48,9 @@
     <dimen name="movie_details_youtube_btn_margin_bottom">16dp</dimen>
     <dimen name="bookmark_dimension">40dp</dimen>
     <dimen name="favourite_heart_dimension">24dp</dimen>
+    <dimen name="bottom_sheet_image_dimension">100dp</dimen>
+    <dimen name="bottom_sheet_elements_margin">5dp</dimen>
+    <dimen name="bottom_sheet_significant_text_size">18sp</dimen>
+    <dimen name="bottom_sheet_small_icon_dimension">18dp</dimen>
 
 </resources>

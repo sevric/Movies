@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".presentation.ui.MovieBottomSheetFragment">
+
+    <ImageView
+        android:id="@+id/iv_movie_poster"
+        android:layout_width="@dimen/bottom_sheet_image_dimension"
+        android:layout_height="@dimen/bottom_sheet_image_dimension"
+        android:layout_margin="@dimen/bottom_sheet_elements_margin"
+        android:contentDescription="@string/description_movie_poster"
+        android:scaleType="centerCrop"
+        android:src="@color/transparent_orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_rating_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bottom_sheet_elements_margin"
+        android:layout_marginTop="@dimen/bottom_sheet_elements_margin"
+        android:gravity="center_vertical"
+        android:text="@string/rating_title"
+        android:textColor="@color/black"
+        app:drawableStartCompat="@drawable/star_popularity"
+        app:drawableTint="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/iv_movie_poster"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_rating_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bottom_sheet_elements_margin"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_rating_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_rating_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_rating_title"
+        tools:text="@string/rating_default_value" />
+
+    <TextView
+        android:id="@+id/btn_tv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/bottom_sheet_elements_margin"
+        android:text="@string/btn_tv_see_movie_details"
+        android:textSize="@dimen/bottom_sheet_significant_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_rating_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_rating_title" />
+
+    <TextView
+        android:id="@+id/tv_genres_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bottom_sheet_elements_margin"
+        android:gravity="center_vertical"
+        android:text="@string/title_genre_list"
+        android:textColor="@color/black"
+        app:drawableStartCompat="@drawable/genres_small_icon"
+        app:drawableTint="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_rating_title"
+        app:layout_constraintTop_toBottomOf="@+id/btn_tv_details" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="@dimen/zero_size"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_genres_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_genres_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_genres_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_genres_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/bottom_sheet_elements_margin"
+                android:layout_marginEnd="@dimen/bottom_sheet_elements_margin"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                tools:text="@string/genre_list_default" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_movieTitle"
+        android:layout_width="@dimen/zero_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bottom_sheet_elements_margin"
+        android:layout_marginEnd="@dimen/bottom_sheet_elements_margin"
+        android:text="@string/movie_default_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/bottom_sheet_significant_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_genres_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_genres_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

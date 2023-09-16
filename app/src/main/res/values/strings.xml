@@ -44,6 +44,7 @@
     <string name="overview_text_itself_value">
         Overview text itself in a very, very, very long version
     </string>
+    <string name="btn_tv_see_movie_details">See movie details…</string>
 
     <!--Hint texts-->
     <string name="hint_search_field">search movies…</string>
