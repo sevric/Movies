@@ -52,6 +52,9 @@ class MoviesViewModelFactory(
                 UpdateWatchLaterUseCase(repository),
                 RemoveMovieFromDBByIdUseCase(repository)
             ) as T
+        } else if (modelClass.isAssignableFrom(MoviesByUserSearchQueryViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            MoviesByUserSearchQueryViewModel(GetMoviesByUserSearchQueryUseCase(repository)) as T
         } else {
             super.create(modelClass)
         }
