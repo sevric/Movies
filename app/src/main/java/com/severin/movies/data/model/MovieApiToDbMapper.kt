@@ -1,6 +1,6 @@
 package com.severin.movies.data.model
 
-class MovieApiToDbMapper constructor() {
+class MovieApiToDbMapper {
     fun mapFromApiToDb(movieItemApi: MovieItemApi): MovieItemDB {
         return MovieItemDB(
             movieItemApi.backdrop_path ?: EMPTY_STRING,

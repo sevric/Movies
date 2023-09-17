@@ -7,7 +7,6 @@ import com.severin.movies.data.database.MoviesRoomDao
 import com.severin.movies.domain.MoviesRepository
 
 class MoviesRepositoryImpl constructor(
-
     private val moviesRoomDao: MoviesRoomDao,
     private val movieApiToDbMapper: MovieApiToDbMapper
 ) : MoviesRepository {

@@ -61,4 +61,8 @@
     <string name="hint_enter_your_email">Enter your email</string>
     <string name="hint_enter_your_password">Enter your password</string>
 
+    <!--Spinner list-->
+    <string name="spinner_option_month">month</string>
+    <string name="spinner_option_week">week</string>
+    <string name="spinner_option_year">year</string>
 </resources>
