@@ -27,6 +27,9 @@ class MoviesViewModelFactory(
         } else if (modelClass.isAssignableFrom(MoviesForChildrenViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             MoviesForChildrenViewModel(GetMoviesForKidsFromApiUseCase(repository)) as T
+        } else if (modelClass.isAssignableFrom(GenresViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            GenresViewModel(GetGenresListFromApiUseCase(repository)) as T
         } else {
             super.create(modelClass)
         }
