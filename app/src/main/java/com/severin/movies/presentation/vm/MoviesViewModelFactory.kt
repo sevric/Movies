@@ -30,6 +30,19 @@ class MoviesViewModelFactory(
         } else if (modelClass.isAssignableFrom(GenresViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             GenresViewModel(GetGenresListFromApiUseCase(repository)) as T
+        } else if (modelClass.isAssignableFrom(FavouriteMoviesViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            FavouriteMoviesViewModel(
+                GetAllFavouritesFromDBUseCase(repository),
+                GetFavouriteByIdFromDBUseCase(repository),
+                GetMovieByIdFromDBUseCase(repository),
+                InsertFavouriteIntoDBUseCase(repository),
+                UpdateFavouriteUseCase(repository),
+                RemoveMovieFromDBByIdUseCase(repository)
+            ) as T
+        } else if (modelClass.isAssignableFrom(MovieByIdFromApiViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            MovieByIdFromApiViewModel(GetMovieByIdFromApiUseCase(repository)) as T
         } else {
             super.create(modelClass)
         }
