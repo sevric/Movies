@@ -55,6 +55,9 @@ class MoviesViewModelFactory(
         } else if (modelClass.isAssignableFrom(MoviesByUserSearchQueryViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             MoviesByUserSearchQueryViewModel(GetMoviesByUserSearchQueryUseCase(repository)) as T
+        } else if (modelClass.isAssignableFrom(MoviesByGenreViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            MoviesByGenreViewModel(GetMoviesByGenreIdFromApiUseCase(repository)) as T
         } else {
             super.create(modelClass)
         }
