@@ -43,6 +43,15 @@ class MoviesViewModelFactory(
         } else if (modelClass.isAssignableFrom(MovieByIdFromApiViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             MovieByIdFromApiViewModel(GetMovieByIdFromApiUseCase(repository)) as T
+        } else if (modelClass.isAssignableFrom(WatchLaterMoviesViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            WatchLaterMoviesViewModel(
+                GetWatchLaterByIdFromDBUseCase(repository),
+                GetMovieByIdFromDBUseCase(repository),
+                InsertWatchLaterIntoDBUseCase(repository),
+                UpdateWatchLaterUseCase(repository),
+                RemoveMovieFromDBByIdUseCase(repository)
+            ) as T
         } else {
             super.create(modelClass)
         }
