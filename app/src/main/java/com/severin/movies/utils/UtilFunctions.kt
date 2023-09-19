@@ -1,12 +1,17 @@
 package com.severin.movies.utils
 
 import androidx.room.util.newStringBuilder
+import com.severin.movies.data.model.MovieItemApi
+import com.severin.movies.utils.ConstantSet.Companion.EMPTY_STRING_OF_GENRES
+import com.severin.movies.utils.ConstantSet.Companion.GENRE_STRING_LIST_DELIMITER
 import com.severin.movies.utils.ConstantSet.Companion.HYPHEN_SIGN_FOR_DATE_FORMAT
 import com.severin.movies.utils.ConstantSet.Companion.NUMBER_OF_DIGITS_FOR_DATE_FORMAT
 import com.severin.movies.utils.ConstantSet.Companion.STRING_DIGIT_FOR_DATE_FORMAT
 import com.severin.movies.utils.ConstantSet.Companion.TIME_UNIT_INPUT_OFFSET
 import com.severin.movies.utils.ConstantSet.Companion.UNITS_TO_PLUS_TO_COUNT_TIME_UNIT_FROM_ONE
+import com.severin.movies.utils.ConstantSet.Companion.VALUE_OF_ROUNDING
 import java.util.*
+import kotlin.math.roundToInt
 
 object UtilFunctions {
 
@@ -41,5 +46,24 @@ object UtilFunctions {
         }
 
         return formattedTimeUnit.toString()
+    }
+
+    fun getRoundedDouble(numberToRound: Double): Double {
+        return (numberToRound * VALUE_OF_ROUNDING).roundToInt() / VALUE_OF_ROUNDING
+    }
+
+    fun getGenresString(movieItemApi: MovieItemApi): String {
+        return if (movieItemApi.genres != null) {
+            val genresList = movieItemApi.genres.map {
+                it.name
+            }
+            genresList.joinToString(GENRE_STRING_LIST_DELIMITER).lowercase().replaceFirstChar {
+                it.titlecase(
+                    Locale.ROOT
+                )
+            }
+        } else {
+            EMPTY_STRING_OF_GENRES
+        }
     }
 }

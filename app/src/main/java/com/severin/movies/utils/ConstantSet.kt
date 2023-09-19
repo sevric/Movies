@@ -8,5 +8,8 @@ class ConstantSet {
         const val NUMBER_OF_DIGITS_FOR_DATE_FORMAT = 2
         const val TIME_UNIT_INPUT_OFFSET = 0
         const val STRING_DIGIT_FOR_DATE_FORMAT = '0'
+        const val VALUE_OF_ROUNDING = 10.0
+        const val GENRE_STRING_LIST_DELIMITER = ", "
+        const val EMPTY_STRING_OF_GENRES = ""
     }
 }
