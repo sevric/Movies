@@ -6,7 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.severin.movies.databinding.FragmentMoviesByGenreBinding
+import com.severin.movies.presentation.MovieApplicationGlobal
+import com.severin.movies.presentation.vm.MoviesByGenreViewModel
+import com.severin.movies.presentation.vm.MoviesViewModelFactory
 
 class MoviesByGenreFragment : Fragment() {
     private var genreId: Int? = null
@@ -14,6 +18,13 @@ class MoviesByGenreFragment : Fragment() {
 
     private var _binding: FragmentMoviesByGenreBinding? = null
     private val binding get() = _binding!!
+
+    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
+        MovieApplicationGlobal.instance
+    }
+    private val moviesByGenreViewModel: MoviesByGenreViewModel by viewModels {
+        MoviesViewModelFactory(movieApplicationGlobal)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +44,8 @@ class MoviesByGenreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setGenreTitle()
-    }
-
-    private fun setGenreTitle() {
-        binding.tvGenreName.text = genreName
+        moviesByGenreViewModel.getMoviesByGenreId(genreId)
+        observeMoviesByGenreId()
     }
 
     override fun onDestroyView() {
@@ -64,6 +73,16 @@ class MoviesByGenreFragment : Fragment() {
         } else {
             genreId = args.getInt(GENRE_ID_KEY)
             genreName = args.getString(GENRE_NAME_KEY)
+        }
+    }
+
+    private fun setGenreTitle() {
+        binding.tvGenreName.text = genreName
+    }
+
+    private fun observeMoviesByGenreId() {
+        moviesByGenreViewModel.moviesByGenre.observe(viewLifecycleOwner) {
+            //TODO(submitList(it.results) for movies by genre Adapter)
         }
     }
 
