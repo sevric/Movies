@@ -8,14 +8,25 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.severin.movies.R
 import com.severin.movies.databinding.FragmentMoviesByUserSearchQueryBinding
+import com.severin.movies.presentation.MovieApplicationGlobal
+import com.severin.movies.presentation.vm.MoviesByUserSearchQueryViewModel
+import com.severin.movies.presentation.vm.MoviesViewModelFactory
 
 class MoviesByUserSearchQueryFragment : Fragment() {
     private var queryStringParam: String? = null
 
     private var _binding: FragmentMoviesByUserSearchQueryBinding? = null
     private val binding get() = _binding!!
+
+    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
+        MovieApplicationGlobal.instance
+    }
+    private val moviesByUserSearchQueryViewModel: MoviesByUserSearchQueryViewModel by viewModels {
+        MoviesViewModelFactory(movieApplicationGlobal)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +48,8 @@ class MoviesByUserSearchQueryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         putText()
+        moviesByUserSearchQueryViewModel.getMoviesByUserSearchQuery(queryStringParam)
+        observeViewModelPopularMovies()
     }
 
     override fun onDestroyView() {
@@ -77,6 +90,12 @@ class MoviesByUserSearchQueryFragment : Fragment() {
     private fun putText() {
         val stringResource: String = resources.getString(R.string.title_movies_by_query)
         binding.tvSearchResultsTitle.text = String.format(stringResource, queryStringParam)
+    }
+
+    private fun observeViewModelPopularMovies() {
+        moviesByUserSearchQueryViewModel.moviesByUserSearchQuery.observe(viewLifecycleOwner) {
+            //TODO(submitList(it.results) for search query movies Adapter)
+        }
     }
 
     companion object {
