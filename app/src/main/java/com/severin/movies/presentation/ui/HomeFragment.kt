@@ -6,9 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.severin.movies.R
+import com.severin.movies.data.model.MovieItemApi
 import com.severin.movies.databinding.FragmentHomeBinding
 import com.severin.movies.presentation.MovieApplicationGlobal
+import com.severin.movies.presentation.adapters.MovieFragmentStarter
+import com.severin.movies.presentation.adapters.MovieFromApiAdapterClickListener
+import com.severin.movies.presentation.adapters.MoviesFromApiLinearAdapter
 import com.severin.movies.presentation.vm.*
 
 class HomeFragment : Fragment() {
@@ -32,6 +38,34 @@ class HomeFragment : Fragment() {
         MoviesViewModelFactory(movieApplicationGlobal)
     }
 
+    private val movieFromApiAdapterClickListener by lazy {
+        object : MovieFromApiAdapterClickListener {
+            override fun onClick(movieItemApi: MovieItemApi) {
+                MovieFragmentStarter(
+                    this@HomeFragment
+                ).startMovieFragment(movieItemApi.id)
+            }
+
+            override fun onLongClick(movieItemApi: MovieItemApi) {
+                MovieFragmentStarter(
+                    this@HomeFragment
+                ).startMovieBottomSheetFragment(movieItemApi.id)
+            }
+        }
+    }
+    private val mostPopularMoviesAdapter by lazy {
+        MoviesFromApiLinearAdapter(movieFromApiAdapterClickListener)
+    }
+    private val nowInTheTheatersMoviesAdapter by lazy {
+        MoviesFromApiLinearAdapter(movieFromApiAdapterClickListener)
+    }
+    private val highlightedPeriodMoviesAdapter by lazy {
+        MoviesFromApiLinearAdapter(movieFromApiAdapterClickListener)
+    }
+    private val moviesForChildrenAdapter by lazy {
+        MoviesFromApiLinearAdapter(movieFromApiAdapterClickListener)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,15 +79,19 @@ class HomeFragment : Fragment() {
 
         prepareClickListener()
 
+        preparePopularMoviesAdapter()
         mostPopularViewModel.getPopularMoviesFromApi()
         observeViewModelPopularMovies()
 
+        prepareNowInTheTheatersAdapter()
         nowInTheTheatersViewModel.getNowInTheTheatersMovies()
         observeNowInTheTheatersViewModel()
 
         //TODO(call data for the highlightedByPeriodViewModel Live Data from the spinner in the subsequent)
+        prepareHighlightedPeriodAdapter()
         observeHighlightedPeriodViewModel()
 
+        prepareMoviesForChildrenAdapter()
         moviesForChildrenViewModel.getMoviesForKidsFromApi()
         observeMoviesForChildrenViewModel()
     }
@@ -77,27 +115,74 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun preparePopularMoviesAdapter() {
+        binding.rvMostPopularMovies.apply {
+            layoutManager = GridLayoutManager(
+                requireContext(),
+                SPAN_COUNT_FOR_GRID_ADAPTER
+            )
+            adapter = mostPopularMoviesAdapter
+        }
+    }
+
+    private fun prepareNowInTheTheatersAdapter() {
+        binding.rvNowInTheTheaters.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            adapter = nowInTheTheatersMoviesAdapter//the same instance of adapter
+        }
+    }
+
+    private fun prepareMoviesForChildrenAdapter() {
+        binding.rvForKids.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            adapter = moviesForChildrenAdapter
+        }
+    }
+
+    private fun prepareHighlightedPeriodAdapter() {
+        binding.rvHighlightedPeriod.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            adapter = highlightedPeriodMoviesAdapter
+        }
+    }
+
     private fun observeViewModelPopularMovies() {
         mostPopularViewModel.popularMoviesLiveData.observe(viewLifecycleOwner) {
-            //TODO(submitList(it.results) for most popular movies Adapter)
+            mostPopularMoviesAdapter.submitList(it.results)
         }
     }
 
     private fun observeNowInTheTheatersViewModel() {
         nowInTheTheatersViewModel.nowInTheTheatersLiveData.observe(viewLifecycleOwner) {
-            //TODO(submitList(it.results) for now in the theaters movies Adapter)
+            nowInTheTheatersMoviesAdapter.submitList(it.results)
         }
     }
 
     private fun observeHighlightedPeriodViewModel() {
         highlightedByPeriodViewModel.highlightedByPeriodLiveData.observe(viewLifecycleOwner) {
-            //TODO(submitList(it.results) for highlighted period movies Adapter)
+            highlightedPeriodMoviesAdapter.submitList(it.results)
         }
     }
 
     private fun observeMoviesForChildrenViewModel() {
         moviesForChildrenViewModel.moviesForKidsFromApi.observe(viewLifecycleOwner) {
-            //TODO(submitList(it.results) for movies for children Adapter)
+            moviesForChildrenAdapter.submitList(it.results)
         }
+    }
+
+    companion object {
+        private const val SPAN_COUNT_FOR_GRID_ADAPTER = 2
     }
 }
