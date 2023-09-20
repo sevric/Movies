@@ -1,6 +1,8 @@
 package com.severin.movies.utils
 
+import android.content.Context
 import androidx.room.util.newStringBuilder
+import com.severin.movies.R
 import com.severin.movies.data.model.MovieItemApi
 import com.severin.movies.utils.ConstantSet.Companion.EMPTY_STRING_OF_GENRES
 import com.severin.movies.utils.ConstantSet.Companion.GENRE_STRING_LIST_DELIMITER
@@ -65,5 +67,20 @@ object UtilFunctions {
         } else {
             EMPTY_STRING_OF_GENRES
         }
+    }
+
+    fun choosePeriod(period: String, context: Context): String {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+
+        val monthOption = context.resources.getString(R.string.spinner_option_month)
+        val yearOption = context.resources.getString(R.string.spinner_option_year)
+        when (period) {
+            monthOption -> calendar.add(Calendar.MONTH, -ConstantSet.ONE_UNIT_OF_TIME_FOR_SPINNER)
+            yearOption -> calendar.add(Calendar.YEAR, -ConstantSet.ONE_UNIT_OF_TIME_FOR_SPINNER)
+            else -> calendar.add(Calendar.WEEK_OF_YEAR, -ConstantSet.ONE_UNIT_OF_TIME_FOR_SPINNER)
+        }
+
+        return getDateFormatted(calendar)
     }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Spinner list-->
+    <string-array name="periods_array">
+        <item>@string/spinner_option_week</item>
+        <item>@string/spinner_option_month</item>
+        <item>@string/spinner_option_year</item>
+    </string-array>
+</resources>

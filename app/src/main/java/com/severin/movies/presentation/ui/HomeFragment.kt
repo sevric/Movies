@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +19,7 @@ import com.severin.movies.presentation.adapters.MovieFragmentStarter
 import com.severin.movies.presentation.adapters.MovieFromApiAdapterClickListener
 import com.severin.movies.presentation.adapters.MoviesFromApiLinearAdapter
 import com.severin.movies.presentation.vm.*
+import com.severin.movies.utils.UtilFunctions
 
 class HomeFragment : Fragment() {
 
@@ -87,7 +91,7 @@ class HomeFragment : Fragment() {
         nowInTheTheatersViewModel.getNowInTheTheatersMovies()
         observeNowInTheTheatersViewModel()
 
-        //TODO(call data for the highlightedByPeriodViewModel Live Data from the spinner in the subsequent)
+        prepareHighlightedPeriodSpinner()
         prepareHighlightedPeriodAdapter()
         observeHighlightedPeriodViewModel()
 
@@ -144,6 +148,39 @@ class HomeFragment : Fragment() {
                 false
             )
             adapter = moviesForChildrenAdapter
+        }
+    }
+
+    private fun prepareHighlightedPeriodSpinner() {
+        //getting spinner from the view
+        val spinner: Spinner = binding.spinnerTimePeriod
+
+        //setting spinner: layouts for it and then adapter
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.periods_array,
+            R.layout.spinner_item_custom
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
+        //setting clickListener for the spinner
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                pos: Int,
+                id: Long
+            ) {
+                // An item was selected. You can retrieve the selected item using
+                val selectedPeriodName: String = parent.getItemAtPosition(pos).toString()
+                val period = UtilFunctions.choosePeriod(selectedPeriodName, requireActivity())
+                highlightedByPeriodViewModel.getHighlightedByPeriodMovies(period)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
         }
     }
 

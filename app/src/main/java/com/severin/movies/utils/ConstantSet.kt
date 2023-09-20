@@ -11,5 +11,6 @@ class ConstantSet {
         const val VALUE_OF_ROUNDING = 10.0
         const val GENRE_STRING_LIST_DELIMITER = ", "
         const val EMPTY_STRING_OF_GENRES = ""
+        const val ONE_UNIT_OF_TIME_FOR_SPINNER = 1
     }
 }
