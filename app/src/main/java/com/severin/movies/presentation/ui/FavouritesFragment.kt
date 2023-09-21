@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.severin.movies.data.model.MovieItemDB
 import com.severin.movies.databinding.FragmentFavouritesBinding
 import com.severin.movies.presentation.MovieApplicationGlobal
@@ -66,6 +69,7 @@ class FavouritesFragment : Fragment() {
         preparePopularMoviesAdapter()
         favouriteMoviesViewModel.getAllFavouriteMovies()
         observeViewModelFavouriteMovies()
+        attachItemTouchHelpersToMovieItems()
     }
 
     override fun onDestroyView() {
@@ -89,7 +93,46 @@ class FavouritesFragment : Fragment() {
         }
     }
 
+    private fun attachItemTouchHelpersToMovieItems() {
+        val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val favoriteMovie = favouriteMoviesAdapter.currentList[position]
+                movieByIdFromApiViewModel.getMovieById(favoriteMovie.movieDbId)
+                val movieFromApi = movieByIdFromApiViewModel.movieById.value
+                if (movieFromApi != null) {
+                    favouriteMoviesViewModel.toggleFavourite(movieFromApi)
+                }
+
+                Snackbar.make(
+                    requireView(),
+                    NOTIFICATION_FOR_DELETED_FROM_FAVOURITES_CASE,
+                    Snackbar.LENGTH_LONG
+                ).setAction(TEXT_FOR_UNDO_ACTION) {
+                    if (movieFromApi != null) {
+                        favouriteMoviesViewModel.toggleFavourite(movieFromApi)
+                    }
+                }.show()
+            }
+        }
+
+        ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rvFavourites)
+    }
+
     companion object {
         private const val SPAN_COUNT_FOR_GRID_ADAPTER = 2
+        private const val NOTIFICATION_FOR_DELETED_FROM_FAVOURITES_CASE = "Deleted from favorites"
+        private const val TEXT_FOR_UNDO_ACTION = "Undo"
     }
 }
