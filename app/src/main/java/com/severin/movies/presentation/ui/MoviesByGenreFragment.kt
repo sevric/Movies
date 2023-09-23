@@ -7,8 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.severin.movies.data.model.MovieItemApi
 import com.severin.movies.databinding.FragmentMoviesByGenreBinding
 import com.severin.movies.presentation.MovieApplicationGlobal
+import com.severin.movies.presentation.adapters.MovieFragmentStarter
+import com.severin.movies.presentation.adapters.MovieFromApiAdapterClickListener
+import com.severin.movies.presentation.adapters.MoviesFromApiGridAdapter
 import com.severin.movies.presentation.vm.MoviesByGenreViewModel
 import com.severin.movies.presentation.vm.MoviesViewModelFactory
 
@@ -24,6 +29,25 @@ class MoviesByGenreFragment : Fragment() {
     }
     private val moviesByGenreViewModel: MoviesByGenreViewModel by viewModels {
         MoviesViewModelFactory(movieApplicationGlobal)
+    }
+
+    private val moviesByGenreAdapterClickListener by lazy {
+        object : MovieFromApiAdapterClickListener {
+            override fun onClick(movieItemApi: MovieItemApi) {
+                MovieFragmentStarter(
+                    this@MoviesByGenreFragment
+                ).startMovieFragment(movieItemApi.id)
+            }
+
+            override fun onLongClick(movieItemApi: MovieItemApi) {
+                MovieFragmentStarter(
+                    this@MoviesByGenreFragment
+                ).startMovieBottomSheetFragment(movieItemApi.id)
+            }
+        }
+    }
+    private val moviesByGenreAdapter by lazy {
+        MoviesFromApiGridAdapter(moviesByGenreAdapterClickListener)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +68,7 @@ class MoviesByGenreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setGenreTitle()
+        prepareMoviesByGenreAdapter()
         moviesByGenreViewModel.getMoviesByGenreId(genreId)
         observeMoviesByGenreId()
     }
@@ -80,9 +105,19 @@ class MoviesByGenreFragment : Fragment() {
         binding.tvGenreName.text = genreName
     }
 
+    private fun prepareMoviesByGenreAdapter() {
+        binding.rvGenres.apply {
+            layoutManager = GridLayoutManager(
+                requireContext(),
+                SPAN_COUNT_FOR_GRID_ADAPTER
+            )
+            adapter = moviesByGenreAdapter
+        }
+    }
+
     private fun observeMoviesByGenreId() {
         moviesByGenreViewModel.moviesByGenre.observe(viewLifecycleOwner) {
-            //TODO(submitList(it.results) for movies by genre Adapter)
+            moviesByGenreAdapter.submitList(it.results)
         }
     }
 
@@ -92,6 +127,7 @@ class MoviesByGenreFragment : Fragment() {
         private const val NO_DATA_OR_GENRE_ID = "Can't open movies, not enough data on genre id"
         private const val NO_MOVIES_BY_ID_OR_NAME =
             "There were no movies found by the submitted genre id or with the submitted name"
+        private const val SPAN_COUNT_FOR_GRID_ADAPTER = 2
 
         fun newInstance(genreId: Int, genreName: String) =
             MoviesByGenreFragment().apply {
