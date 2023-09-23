@@ -57,5 +57,8 @@
     <dimen name="favourites_nav_icon_dimension">128dp</dimen>
     <dimen name="account_circle_dimension">24dp</dimen>
     <dimen name="account_pages_til_margin_bottom">15dp</dimen>
+    <dimen name="reset_password_tv_title_margin_bottom">40dp</dimen>
+    <dimen name="account_pages_regular_text_size">30sp</dimen>
+    <dimen name="reset_password_btn_margin">50dp</dimen>
 
 </resources>

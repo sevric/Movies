@@ -26,6 +26,10 @@
     <string name="description_btn_add_to_favorites">Button to add to favorites</string>
     <string name="description_btn_trailer_watch">Search trailers on YouTube button</string>
     <string name="description_btn_register">Button to register with the data your filled</string>
+    <string name="description_btn_reset_password">
+        Button to reset password with the email you filled
+    </string>
+    <string name="description_btn_back_to_login">Button to back to login page</string>
 
     <!--Views texts-->
     <string name="title_part_for_kids">For kids</string>
@@ -56,6 +60,9 @@
     <string name="title_default_genre_name">Default genre name</string>
     <string name="title_movies_by_query_text">Movies by query \"query\"</string>
     <string name="title_movies_by_query">Movies by query \"%1$s\"</string>
+    <string name="title_forgot_your_password">Forgot your password?</string>
+    <string name="btn_reset_password">Reset password</string>
+    <string name="btn_back_to_login">Back to login</string>
 
     <!--Hint texts-->
     <string name="hint_search_field">search movies…</string>
@@ -67,6 +74,7 @@
     <string name="hint_last_name">Last Name</string>
     <string name="hint_age">Age</string>
     <string name="hint_register">Register</string>
+    <string name="hint_enter_email_to_reset_password">Enter email to reset password</string>
 
     <!--Spinner list-->
     <string name="spinner_option_month">month</string>
