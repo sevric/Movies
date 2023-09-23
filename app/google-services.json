@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560850804633",
+    "project_id": "movies-27f6f",
+    "storage_bucket": "movies-27f6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560850804633:android:2b2e925df1a04e6aaf7d08",
+        "android_client_info": {
+          "package_name": "com.severin.movies"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4CPmxMqubONnyxPAoT0t5NMO322tCsJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
