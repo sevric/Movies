@@ -5,12 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.severin.movies.R
 import com.severin.movies.databinding.FragmentPersonalPageBinding
+import com.severin.movies.presentation.vm.FirebaseAuthorizationViewModel
+import com.severin.movies.presentation.vm.FirebaseDBViewModel
 
 class PersonalPageFragment : Fragment() {
 
     private var _binding: FragmentPersonalPageBinding? = null
     private val binding get() = _binding!!
+
+    private val firebaseAuthorizationViewModel: FirebaseAuthorizationViewModel by lazy {
+        ViewModelProvider(
+            requireActivity()
+        )[FirebaseAuthorizationViewModel::class.java]
+    }
+    private val firebaseDBViewModel: FirebaseDBViewModel by lazy {
+        ViewModelProvider(
+            requireActivity()
+        )[FirebaseDBViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,22 +48,40 @@ class PersonalPageFragment : Fragment() {
     }
 
     private fun observeFirebaseAuthorizationViewModel() {
-        //TODO(observe authorized user of firebase authorization view model
-        // and launch LoginFragment if the user is  null)
+        firebaseAuthorizationViewModel.currentFirebaseAuthUser.observe(this) {
+            if (it == null) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.main_navigation_view,
+                        LoginFragment.newInstance(DEFAULT_EMPTY_EMAIL_STRING)
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
 
-        //TODO(observe authorized user of  firebase users data base view model
-        // and update the text field with the user name and last name)
+        firebaseDBViewModel.currentFirebaseDBUser.observe(this) {
+            if (it != null) {
+                binding.tvNameAndSurname.text = String.format(
+                    STRING_WITH_NAME_AND_LAST_NAME_TO_FORMAT,
+                    it.name,
+                    it.lastName
+                )
+            }
+        }
 
         //TODO(make adding watch later movies from the firebase DB)
     }
 
     private fun prepareClickListener() {
         binding.ivBtnLogoutHidden.setOnClickListener {//TODO(change to other btn (hidden in the menu by click on the current btn))
-            //TODO(call logging out of firebase authorization view model)
+            firebaseAuthorizationViewModel.logout()
         }
     }
 
     companion object {
+        private const val DEFAULT_EMPTY_EMAIL_STRING = ""
+        private const val STRING_WITH_NAME_AND_LAST_NAME_TO_FORMAT = "%s %s"
 
         @JvmStatic
         fun newInstance() =
