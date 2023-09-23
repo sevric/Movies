@@ -9,9 +9,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.severin.movies.R
+import com.severin.movies.data.model.MovieItemApi
 import com.severin.movies.databinding.FragmentMoviesByUserSearchQueryBinding
 import com.severin.movies.presentation.MovieApplicationGlobal
+import com.severin.movies.presentation.adapters.MovieFragmentStarter
+import com.severin.movies.presentation.adapters.MovieFromApiAdapterClickListener
+import com.severin.movies.presentation.adapters.MoviesFromApiGridAdapter
 import com.severin.movies.presentation.vm.MoviesByUserSearchQueryViewModel
 import com.severin.movies.presentation.vm.MoviesViewModelFactory
 
@@ -26,6 +31,25 @@ class MoviesByUserSearchQueryFragment : Fragment() {
     }
     private val moviesByUserSearchQueryViewModel: MoviesByUserSearchQueryViewModel by viewModels {
         MoviesViewModelFactory(movieApplicationGlobal)
+    }
+
+    private val movieBySearchQueryAdapterClickListener by lazy {
+        object : MovieFromApiAdapterClickListener {
+            override fun onClick(movieItemApi: MovieItemApi) {
+                MovieFragmentStarter(
+                    this@MoviesByUserSearchQueryFragment
+                ).startMovieFragment(movieItemApi.id)
+            }
+
+            override fun onLongClick(movieItemApi: MovieItemApi) {
+                MovieFragmentStarter(
+                    this@MoviesByUserSearchQueryFragment
+                ).startMovieBottomSheetFragment(movieItemApi.id)
+            }
+        }
+    }
+    private val searchQueryMoviesAdapter by lazy {
+        MoviesFromApiGridAdapter(movieBySearchQueryAdapterClickListener)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +72,7 @@ class MoviesByUserSearchQueryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         putText()
+        preparePopularMoviesAdapter()
         moviesByUserSearchQueryViewModel.getMoviesByUserSearchQuery(queryStringParam)
         observeViewModelPopularMovies()
     }
@@ -80,7 +105,8 @@ class MoviesByUserSearchQueryFragment : Fragment() {
     }
 
     private fun forceHideKeyboard() {
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val view = requireActivity().currentFocus
         if (view != null) {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
@@ -92,9 +118,19 @@ class MoviesByUserSearchQueryFragment : Fragment() {
         binding.tvSearchResultsTitle.text = String.format(stringResource, queryStringParam)
     }
 
+    private fun preparePopularMoviesAdapter() {
+        binding.rvMoviesBySearchQuery.apply {
+            layoutManager = GridLayoutManager(
+                requireContext(),
+                SPAN_COUNT_FOR_GRID_ADAPTER
+            )
+            adapter = searchQueryMoviesAdapter
+        }
+    }
+
     private fun observeViewModelPopularMovies() {
         moviesByUserSearchQueryViewModel.moviesByUserSearchQuery.observe(viewLifecycleOwner) {
-            //TODO(submitList(it.results) for search query movies Adapter)
+            searchQueryMoviesAdapter.submitList(it.results)
         }
     }
 
@@ -102,6 +138,7 @@ class MoviesByUserSearchQueryFragment : Fragment() {
         private const val QUERY_STRING_PARAM = "query_string_param"
         private const val NO_QUERY_ENTERED = "No query were entered"
         private const val REQUEST_ENTER_QUERY = "Enter a query"
+        private const val SPAN_COUNT_FOR_GRID_ADAPTER = 2
 
         @JvmStatic
         fun newInstance(param1: String) =
