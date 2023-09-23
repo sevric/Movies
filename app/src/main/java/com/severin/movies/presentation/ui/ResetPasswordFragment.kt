@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.severin.movies.R
 import com.severin.movies.databinding.FragmentResetPasswordBinding
+import com.severin.movies.presentation.vm.ResetPasswordViewModel
 
 class ResetPasswordFragment : Fragment() {
 
@@ -15,6 +17,12 @@ class ResetPasswordFragment : Fragment() {
 
     private var _binding: FragmentResetPasswordBinding? = null
     private val binding get() = _binding!!
+
+    private val resetPasswordViewModel: ResetPasswordViewModel by lazy {
+        ViewModelProvider(
+            requireActivity()
+        )[ResetPasswordViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +81,7 @@ class ResetPasswordFragment : Fragment() {
     private fun setClickListeners() {
         binding.btnResetPassword.setOnClickListener {
             val emailString = binding.inputEmailResetPassword.text.toString()
-            //TODO(call password reset of reset password view model with the emailString parameter)
+            resetPasswordViewModel.resetPassword(emailString)
         }
         binding.btnBackToLogin.setOnClickListener {
             val emailString = binding.inputEmailResetPassword.text.toString()
@@ -90,17 +98,31 @@ class ResetPasswordFragment : Fragment() {
     }
 
     private fun observeResetPasswordViewModel() {
-        //TODO(observe error of reset password view model
-        // and Toast it's text when unsuccessful reset request (error != null))
+        resetPasswordViewModel.error.observe(this) {
+            if (it != null) {
+                Toast.makeText(
+                    requireActivity(),
+                    it,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
 
-        //TODO(observe isSuccessful of reset password view model
-        // and Toast the notification about successful email sending if isSuccessful == true)
+        resetPasswordViewModel.isSuccessful.observe(this) {
+            Toast.makeText(
+                requireActivity(),
+                LINK_SENT_NOTIFICATION,
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     companion object {
         private const val EMAIL_TO_RESET_STR_KEY = "emailToResetStr"
         private const val NO_EMAIL_PASSED_NOTIFICATION = "No email were passed"
         private const val REQUEST_PROVIDE_EMAIL_NOTIFICATION = "Provide your email"
+        private const val LINK_SENT_NOTIFICATION =
+            "The reset link has been sent to the email. Check it."
 
         @JvmStatic
         fun newInstance(emailToResetPassword: String) =
