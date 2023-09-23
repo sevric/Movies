@@ -6,13 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.severin.movies.R
 import com.severin.movies.databinding.FragmentRegistrationBinding
+import com.severin.movies.presentation.vm.RegistrationViewModel
 
 class RegistrationFragment : Fragment() {
     private var emailToResetPassword: String? = null
 
     private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding!!
+
+    private val registrationViewModel: RegistrationViewModel by lazy {
+        ViewModelProvider(
+            requireActivity()
+        )[RegistrationViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +95,13 @@ class RegistrationFragment : Fragment() {
                 || ageString.isNotEmpty()
                 || ageString != EMPTY_STRING
             ) {
-                //TODO(call signing up of registration view model)
+                registrationViewModel.signUp(
+                    emailString,
+                    passwordString,
+                    nameString,
+                    lastNameString,
+                    Integer.parseInt(ageString)
+                )
             } else {
                 Toast.makeText(
                     requireActivity(),
@@ -98,9 +113,27 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun observeRegistrationViewModel() {
-        //TODO(observe error of registration view model and Toast it's text when unsuccessful authorisation (error != null))
+        registrationViewModel.error.observe(this) {
+            if (it != null) {
+                Toast.makeText(
+                    requireActivity(),
+                    it,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
 
-        //TODO(observe authorised user  of registration view model and start the corresponding personal fragment)
+        registrationViewModel.user.observe(this) {
+            if (it != null) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.main_navigation_view,
+                        PersonalPageFragment.newInstance()
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
     }
 
     companion object {
