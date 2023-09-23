@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.severin.movies.R
+import com.severin.movies.data.model.MovieItemDB
 import com.severin.movies.databinding.FragmentPersonalPageBinding
+import com.severin.movies.presentation.adapters.MovieFragmentStarter
+import com.severin.movies.presentation.adapters.MovieFromDBAdapterClickListener
+import com.severin.movies.presentation.adapters.MovieFromDbAdapter
 import com.severin.movies.presentation.vm.FirebaseAuthorizationViewModel
 import com.severin.movies.presentation.vm.FirebaseDBViewModel
 
@@ -27,6 +32,25 @@ class PersonalPageFragment : Fragment() {
         )[FirebaseDBViewModel::class.java]
     }
 
+    private val movieFromDBAdapterClickListener by lazy {
+        object : MovieFromDBAdapterClickListener {
+            override fun onClick(movieItemDB: MovieItemDB) {//TODO(not as by clean architecture, maybe use interface inside domain layer)
+                MovieFragmentStarter(
+                    this@PersonalPageFragment
+                ).startMovieFragment(movieItemDB.movieDbId)//TODO(not as by clean architecture, maybe use interface inside domain layer)
+            }
+
+            override fun onLongClick(movieItemDB: MovieItemDB) {
+                MovieFragmentStarter(
+                    this@PersonalPageFragment
+                ).startMovieBottomSheetFragment(movieItemDB.movieDbId)
+            }
+        }
+    }
+    private val watchLaterMoviesAdapter by lazy {
+        MovieFromDbAdapter(movieFromDBAdapterClickListener)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +64,7 @@ class PersonalPageFragment : Fragment() {
 
         observeFirebaseAuthorizationViewModel()
         prepareClickListener()
+        prepareAdapter()
     }
 
     override fun onDestroyView() {
@@ -79,9 +104,20 @@ class PersonalPageFragment : Fragment() {
         }
     }
 
+    private fun prepareAdapter() {
+        binding.rvAccountWatchLater.apply {
+            layoutManager = GridLayoutManager(
+                requireContext(),
+                SPAN_COUNT_FOR_GRID_ADAPTER
+            )
+            adapter = watchLaterMoviesAdapter
+        }
+    }
+
     companion object {
         private const val DEFAULT_EMPTY_EMAIL_STRING = ""
         private const val STRING_WITH_NAME_AND_LAST_NAME_TO_FORMAT = "%s %s"
+        private const val SPAN_COUNT_FOR_GRID_ADAPTER = 2
 
         @JvmStatic
         fun newInstance() =
