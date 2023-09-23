@@ -30,6 +30,7 @@
         Button to reset password with the email you filled
     </string>
     <string name="description_btn_back_to_login">Button to back to login page</string>
+    <string name="description_iv_btn_open_personal_page_menu">Open personal page menu</string>
 
     <!--Views texts-->
     <string name="title_part_for_kids">For kids</string>
@@ -63,6 +64,7 @@
     <string name="title_forgot_your_password">Forgot your password?</string>
     <string name="btn_reset_password">Reset password</string>
     <string name="btn_back_to_login">Back to login</string>
+    <string name="title_watch_later">Movies I wanted to watch later</string>
 
     <!--Hint texts-->
     <string name="hint_search_field">search movies…</string>

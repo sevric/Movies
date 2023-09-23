@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.ui.PersonalPageFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_personalPageHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/personal_page_title_margin_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_nameAndSurname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/page_title_text_size"
+            android:textStyle="bold"
+            tools:text="Name Surname" />
+
+        <ImageView
+            android:id="@+id/iv_btnLogoutHidden"
+            android:layout_width="@dimen/personal_page_btn_iv_menu_width"
+            android:layout_height="@dimen/personal_page_btn_iv_menu_height"
+            android:layout_gravity="end|center"
+            android:contentDescription="@string/description_iv_btn_open_personal_page_menu"
+            android:padding="@dimen/personal_page_btn_iv_menu_padding"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_menu" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_moviesIWantedToWatchLater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/personal_page_title_margin_start"
+        android:text="@string/title_watch_later"
+        android:textColor="@color/black"
+        android:textSize="@dimen/personal_page_second_title_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/ll_personalPageHeader" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_accountWatchLater"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zero_size"
+        android:paddingStart="@dimen/single_rv_side_padding"
+        android:paddingEnd="@dimen/single_rv_side_padding"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_moviesIWantedToWatchLater"
+        tools:itemCount="20"
+        tools:listitem="@layout/grid_recycler_item"
+        tools:spanCount="2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
