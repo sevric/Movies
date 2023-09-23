@@ -56,5 +56,6 @@
     <dimen name="genres_nav_icon_dimension">68dp</dimen>
     <dimen name="favourites_nav_icon_dimension">128dp</dimen>
     <dimen name="account_circle_dimension">24dp</dimen>
+    <dimen name="account_pages_til_margin_bottom">15dp</dimen>
 
 </resources>

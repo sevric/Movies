@@ -25,6 +25,7 @@
     <string name="description_btn_add_to_see_later">Button to add to watch later list</string>
     <string name="description_btn_add_to_favorites">Button to add to favorites</string>
     <string name="description_btn_trailer_watch">Search trailers on YouTube button</string>
+    <string name="description_btn_register">Button to register with the data your filled</string>
 
     <!--Views texts-->
     <string name="title_part_for_kids">For kids</string>
@@ -60,6 +61,12 @@
     <string name="hint_search_field">search movies…</string>
     <string name="hint_enter_your_email">Enter your email</string>
     <string name="hint_enter_your_password">Enter your password</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_age">Age</string>
+    <string name="hint_register">Register</string>
 
     <!--Spinner list-->
     <string name="spinner_option_month">month</string>

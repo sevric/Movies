@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingStart="@dimen/account_pages_root_padding"
+    android:paddingTop="@dimen/account_pages_root_padding"
+    android:paddingEnd="@dimen/account_pages_root_padding"
+    tools:context=".presentation.ui.RegistrationFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputEmailOrLoginContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/account_pages_til_margin_bottom"
+            android:hint="@string/hint_email"
+            app:counterEnabled="true"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_alert_circle"
+            app:layout_constraintBottom_toTopOf="@+id/inputPasswordContainer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputEmailOrLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputPasswordContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/account_pages_til_margin_bottom"
+            android:hint="@string/hint_password"
+            app:counterEnabled="true"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_alert_circle"
+            app:layout_constraintBottom_toTopOf="@+id/inputNameContainer"
+            app:layout_constraintTop_toBottomOf="@+id/inputEmailOrLoginContainer">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputNameContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/account_pages_til_margin_bottom"
+            android:hint="@string/hint_name"
+            app:counterEnabled="true"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_alert_circle"
+            app:layout_constraintBottom_toTopOf="@+id/inputLastNameContainer"
+            app:layout_constraintTop_toBottomOf="@+id/inputPasswordContainer">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLastNameContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/account_pages_til_margin_bottom"
+            android:hint="@string/hint_last_name"
+            app:counterEnabled="true"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_alert_circle"
+            app:layout_constraintBottom_toTopOf="@+id/inputAgeContainer"
+            app:layout_constraintTop_toBottomOf="@+id/inputNameContainer">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputAgeContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/account_pages_til_margin_bottom"
+            android:hint="@string/hint_age"
+            app:counterEnabled="true"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_alert_circle"
+            app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+            app:layout_constraintTop_toBottomOf="@+id/inputLastNameContainer">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_btn_register"
+            android:text="@string/hint_register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputAgeContainer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
