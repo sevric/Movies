@@ -1,5 +1,6 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.severin.movies.R
 import com.severin.movies.databinding.FragmentResetPasswordBinding
+import com.severin.movies.presentation.MovieApplicationGlobal
 import com.severin.movies.presentation.vm.ResetPasswordViewModel
 
 class ResetPasswordFragment : Fragment() {
@@ -18,10 +20,19 @@ class ResetPasswordFragment : Fragment() {
     private var _binding: FragmentResetPasswordBinding? = null
     private val binding get() = _binding!!
 
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
+    }
+
     private val resetPasswordViewModel: ResetPasswordViewModel by lazy {
         ViewModelProvider(
             requireActivity()
         )[ResetPasswordViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

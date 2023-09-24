@@ -2,8 +2,9 @@ package com.severin.movies.domain
 
 import com.severin.movies.data.model.MovieItemApi
 import com.severin.movies.data.model.MovieItemDB
+import javax.inject.Inject
 
-class InsertFavouriteIntoDBUseCase constructor(
+class InsertFavouriteIntoDBUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 

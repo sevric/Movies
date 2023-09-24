@@ -7,8 +7,9 @@ import com.severin.movies.data.model.MoviesResponse
 import com.severin.movies.domain.GetPopularMoviesFromApiUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MostPopularMoviesViewModel constructor(
+class MostPopularMoviesViewModel @Inject constructor(
     private val getPopularMoviesFromApiUseCase: GetPopularMoviesFromApiUseCase
 ) : ViewModel() {
     val popularMoviesLiveData = MutableLiveData<MoviesResponse>()

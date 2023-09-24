@@ -1,12 +1,13 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.severin.movies.data.model.MovieItemApi
 import com.severin.movies.databinding.FragmentMoviesByGenreBinding
@@ -16,6 +17,7 @@ import com.severin.movies.presentation.adapters.MovieFromApiAdapterClickListener
 import com.severin.movies.presentation.adapters.MoviesFromApiGridAdapter
 import com.severin.movies.presentation.vm.MoviesByGenreViewModel
 import com.severin.movies.presentation.vm.MoviesViewModelFactory
+import javax.inject.Inject
 
 class MoviesByGenreFragment : Fragment() {
     private var genreId: Int? = null
@@ -24,11 +26,14 @@ class MoviesByGenreFragment : Fragment() {
     private var _binding: FragmentMoviesByGenreBinding? = null
     private val binding get() = _binding!!
 
-    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
-        MovieApplicationGlobal.instance
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
     }
-    private val moviesByGenreViewModel: MoviesByGenreViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+
+    @Inject
+    lateinit var viewModelFactory: MoviesViewModelFactory
+    private val moviesByGenreViewModel: MoviesByGenreViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[MoviesByGenreViewModel::class.java]
     }
 
     private val moviesByGenreAdapterClickListener by lazy {
@@ -48,6 +53,11 @@ class MoviesByGenreFragment : Fragment() {
     }
     private val moviesByGenreAdapter by lazy {
         MoviesFromApiGridAdapter(moviesByGenreAdapterClickListener)
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

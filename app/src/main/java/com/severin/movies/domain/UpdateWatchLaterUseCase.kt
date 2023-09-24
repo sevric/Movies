@@ -1,6 +1,8 @@
 package com.severin.movies.domain
 
-class UpdateWatchLaterUseCase constructor(
+import javax.inject.Inject
+
+class UpdateWatchLaterUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 

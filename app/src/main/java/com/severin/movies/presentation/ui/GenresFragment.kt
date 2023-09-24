@@ -1,11 +1,12 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.severin.movies.data.model.Genre
 import com.severin.movies.databinding.FragmentGenresBinding
@@ -15,17 +16,21 @@ import com.severin.movies.presentation.adapters.GenresAdapterClickListener
 import com.severin.movies.presentation.adapters.MovieFragmentStarter
 import com.severin.movies.presentation.vm.GenresViewModel
 import com.severin.movies.presentation.vm.MoviesViewModelFactory
+import javax.inject.Inject
 
 class GenresFragment : Fragment() {
 
     private var _binding: FragmentGenresBinding? = null
     private val binding get() = _binding!!
 
-    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
-        MovieApplicationGlobal.instance
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
     }
-    private val genresViewModel: GenresViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+
+    @Inject
+    lateinit var viewModelFactory: MoviesViewModelFactory
+    private val genresViewModel: GenresViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[GenresViewModel::class.java]
     }
 
     private val genresAdapterClickListener by lazy {
@@ -39,6 +44,11 @@ class GenresFragment : Fragment() {
     }
     private val genresAdapter by lazy {
         GenresAdapter(genresAdapterClickListener)
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

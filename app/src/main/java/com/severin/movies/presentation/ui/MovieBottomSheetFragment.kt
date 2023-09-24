@@ -1,11 +1,12 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.severin.movies.data.model.MovieItemApi
@@ -17,6 +18,7 @@ import com.severin.movies.presentation.vm.MoviesViewModelFactory
 import com.severin.movies.utils.ConstantSet
 import com.severin.movies.utils.UtilFunctions
 import com.severin.movies.utils.UtilFunctions.getGenresString
+import javax.inject.Inject
 
 class MovieBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -25,11 +27,20 @@ class MovieBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentMovieBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
-        MovieApplicationGlobal.instance
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
     }
-    private val movieByIdFromApiViewModel: MovieByIdFromApiViewModel by activityViewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+
+    @Inject
+    lateinit var viewModelFactory: MoviesViewModelFactory
+
+    private val movieByIdFromApiViewModel:MovieByIdFromApiViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[MovieByIdFromApiViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

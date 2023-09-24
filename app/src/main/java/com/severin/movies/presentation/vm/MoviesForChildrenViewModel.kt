@@ -7,8 +7,9 @@ import com.severin.movies.data.model.MoviesResponse
 import com.severin.movies.domain.GetMoviesForKidsFromApiUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MoviesForChildrenViewModel constructor(
+class MoviesForChildrenViewModel @Inject constructor(
     private val getMoviesForKidsFromApiUseCase: GetMoviesForKidsFromApiUseCase
 ) : ViewModel() {
     val moviesForKidsFromApi = MutableLiveData<MoviesResponse>()

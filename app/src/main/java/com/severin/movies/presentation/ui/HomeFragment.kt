@@ -1,5 +1,6 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.severin.movies.R
@@ -20,26 +21,30 @@ import com.severin.movies.presentation.adapters.MovieFromApiAdapterClickListener
 import com.severin.movies.presentation.adapters.MoviesFromApiLinearAdapter
 import com.severin.movies.presentation.vm.*
 import com.severin.movies.utils.UtilFunctions
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
-        MovieApplicationGlobal.instance
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
     }
-    private val mostPopularViewModel: MostPopularMoviesViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+
+    @Inject
+    lateinit var viewModelFactory: MoviesViewModelFactory
+    private val mostPopularViewModel: MostPopularMoviesViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[MostPopularMoviesViewModel::class.java]
     }
-    private val nowInTheTheatersViewModel: NowInTheTheatersViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+    private val nowInTheTheatersViewModel: NowInTheTheatersViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[NowInTheTheatersViewModel::class.java]
     }
-    private val highlightedByPeriodViewModel: HighlightedByPeriodViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+    private val highlightedByPeriodViewModel: HighlightedByPeriodViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[HighlightedByPeriodViewModel::class.java]
     }
-    private val moviesForChildrenViewModel: MoviesForChildrenViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+    private val moviesForChildrenViewModel: MoviesForChildrenViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[MoviesForChildrenViewModel::class.java]
     }
 
     private val movieFromApiAdapterClickListener by lazy {
@@ -68,6 +73,11 @@ class HomeFragment : Fragment() {
     }
     private val moviesForChildrenAdapter by lazy {
         MoviesFromApiLinearAdapter(movieFromApiAdapterClickListener)
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

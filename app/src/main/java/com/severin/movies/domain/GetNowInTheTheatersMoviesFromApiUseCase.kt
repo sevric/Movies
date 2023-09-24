@@ -1,8 +1,9 @@
 package com.severin.movies.domain
 
 import com.severin.movies.data.model.MoviesResponse
+import javax.inject.Inject
 
-class GetNowInTheTheatersMoviesFromApiUseCase constructor(
+class GetNowInTheTheatersMoviesFromApiUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 

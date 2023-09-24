@@ -1,5 +1,6 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.severin.movies.R
 import com.severin.movies.data.model.MovieItemDB
 import com.severin.movies.databinding.FragmentPersonalPageBinding
+import com.severin.movies.presentation.MovieApplicationGlobal
 import com.severin.movies.presentation.adapters.MovieFragmentStarter
 import com.severin.movies.presentation.adapters.MovieFromDBAdapterClickListener
 import com.severin.movies.presentation.adapters.MovieFromDbAdapter
@@ -20,6 +22,10 @@ class PersonalPageFragment : Fragment() {
 
     private var _binding: FragmentPersonalPageBinding? = null
     private val binding get() = _binding!!
+
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
+    }
 
     private val firebaseAuthorizationViewModel: FirebaseAuthorizationViewModel by lazy {
         ViewModelProvider(
@@ -49,6 +55,11 @@ class PersonalPageFragment : Fragment() {
     }
     private val watchLaterMoviesAdapter by lazy {
         MovieFromDbAdapter(movieFromDBAdapterClickListener)
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

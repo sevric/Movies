@@ -7,8 +7,9 @@ import com.severin.movies.data.model.MoviesResponse
 import com.severin.movies.domain.GetPopularMoviesByPeriodUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HighlightedByPeriodViewModel constructor(
+class HighlightedByPeriodViewModel @Inject constructor(
     private val getPopularMoviesByPeriodUseCase: GetPopularMoviesByPeriodUseCase
 ) : ViewModel() {
     val highlightedByPeriodLiveData = MutableLiveData<MoviesResponse>()

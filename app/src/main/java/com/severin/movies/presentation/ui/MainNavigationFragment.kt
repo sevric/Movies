@@ -1,5 +1,6 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,20 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.severin.movies.R
 import com.severin.movies.databinding.FragmentMainNavigationBinding
+import com.severin.movies.presentation.MovieApplicationGlobal
 
 class MainNavigationFragment : Fragment() {
     private var _binding: FragmentMainNavigationBinding? = null
     private val binding get() = _binding!!
+
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

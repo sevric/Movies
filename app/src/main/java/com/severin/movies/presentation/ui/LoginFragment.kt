@@ -1,5 +1,6 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.severin.movies.R
 import com.severin.movies.databinding.FragmentLoginBinding
+import com.severin.movies.presentation.MovieApplicationGlobal
 import com.severin.movies.presentation.vm.FirebaseAuthorizationViewModel
 
 class LoginFragment : Fragment() {
@@ -20,10 +22,19 @@ class LoginFragment : Fragment() {
     private lateinit var emailString: String
     private lateinit var passwordString: String
 
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
+    }
+
     private val firebaseAuthorizationViewModel: FirebaseAuthorizationViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
         )[FirebaseAuthorizationViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

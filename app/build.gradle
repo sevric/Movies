@@ -72,6 +72,10 @@ dependencies {
     //Realtime Database library
     implementation 'com.google.firebase:firebase-database-ktx'
 
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.35.1'
+    kapt 'com.google.dagger:dagger-compiler:2.35.1'
+
     //Testing
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

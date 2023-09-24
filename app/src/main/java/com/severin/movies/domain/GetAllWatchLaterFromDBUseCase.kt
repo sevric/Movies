@@ -1,6 +1,8 @@
 package com.severin.movies.domain
 
-class GetAllWatchLaterFromDBUseCase constructor(
+import javax.inject.Inject
+
+class GetAllWatchLaterFromDBUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 

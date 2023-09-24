@@ -1,6 +1,8 @@
 package com.severin.movies.domain
 
-class UpdateFavouriteUseCase constructor(
+import javax.inject.Inject
+
+class UpdateFavouriteUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 

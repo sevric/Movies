@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.severin.movies.R
 import com.severin.movies.data.model.MovieItemApi
@@ -19,6 +19,7 @@ import com.severin.movies.presentation.adapters.MovieFromApiAdapterClickListener
 import com.severin.movies.presentation.adapters.MoviesFromApiGridAdapter
 import com.severin.movies.presentation.vm.MoviesByUserSearchQueryViewModel
 import com.severin.movies.presentation.vm.MoviesViewModelFactory
+import javax.inject.Inject
 
 class MoviesByUserSearchQueryFragment : Fragment() {
     private var queryStringParam: String? = null
@@ -26,11 +27,17 @@ class MoviesByUserSearchQueryFragment : Fragment() {
     private var _binding: FragmentMoviesByUserSearchQueryBinding? = null
     private val binding get() = _binding!!
 
-    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
-        MovieApplicationGlobal.instance
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
     }
-    private val moviesByUserSearchQueryViewModel: MoviesByUserSearchQueryViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+
+    @Inject
+    lateinit var viewModelFactory: MoviesViewModelFactory
+    private val moviesByUserSearchQueryViewModel: MoviesByUserSearchQueryViewModel by lazy {
+        ViewModelProvider(
+            this,
+            viewModelFactory
+        )[MoviesByUserSearchQueryViewModel::class.java]
     }
 
     private val movieBySearchQueryAdapterClickListener by lazy {
@@ -50,6 +57,11 @@ class MoviesByUserSearchQueryFragment : Fragment() {
     }
     private val searchQueryMoviesAdapter by lazy {
         MoviesFromApiGridAdapter(movieBySearchQueryAdapterClickListener)
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,12 +1,12 @@
 package com.severin.movies.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -20,20 +20,31 @@ import com.severin.movies.presentation.adapters.MovieFromDbAdapter
 import com.severin.movies.presentation.vm.FavouriteMoviesViewModel
 import com.severin.movies.presentation.vm.MovieByIdFromApiViewModel
 import com.severin.movies.presentation.vm.MoviesViewModelFactory
+import javax.inject.Inject
 
 class FavouritesFragment : Fragment() {
 
     private var _binding: FragmentFavouritesBinding? = null
     private val binding get() = _binding!!
 
-    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
-        MovieApplicationGlobal.instance
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
     }
-    private val favouriteMoviesViewModel: FavouriteMoviesViewModel by activityViewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+
+    @Inject
+    lateinit var viewModelFactory: MoviesViewModelFactory
+
+    private val favouriteMoviesViewModel: FavouriteMoviesViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        )[FavouriteMoviesViewModel::class.java]
     }
-    private val movieByIdFromApiViewModel: MovieByIdFromApiViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+    private val movieByIdFromApiViewModel: MovieByIdFromApiViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        )[MovieByIdFromApiViewModel::class.java]
     }
 
     private val movieFromDBAdapterClickListener by lazy {
@@ -53,6 +64,11 @@ class FavouritesFragment : Fragment() {
     }
     private val favouriteMoviesAdapter by lazy {
         MovieFromDbAdapter(movieFromDBAdapterClickListener)
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

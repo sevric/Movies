@@ -9,8 +9,9 @@ import com.severin.movies.data.model.MovieItemDB
 import com.severin.movies.domain.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WatchLaterMoviesViewModel constructor(
+class WatchLaterMoviesViewModel @Inject constructor(
     private val getWatchLaterByIdFromDBUseCase: GetWatchLaterByIdFromDBUseCase,
     private val getMovieByIdFromDBUseCase: GetMovieByIdFromDBUseCase,
     private val insertWatchLaterIntoDBUseCase: InsertWatchLaterIntoDBUseCase,

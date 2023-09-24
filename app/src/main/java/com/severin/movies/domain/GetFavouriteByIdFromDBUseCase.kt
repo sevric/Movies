@@ -1,8 +1,9 @@
 package com.severin.movies.domain
 
 import com.severin.movies.data.model.MovieItemDB
+import javax.inject.Inject
 
-class GetFavouriteByIdFromDBUseCase constructor(
+class GetFavouriteByIdFromDBUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 

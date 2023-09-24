@@ -1,6 +1,8 @@
 package com.severin.movies.domain
 
-class GetAllFavouritesFromDBUseCase constructor(
+import javax.inject.Inject
+
+class GetAllFavouritesFromDBUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
 

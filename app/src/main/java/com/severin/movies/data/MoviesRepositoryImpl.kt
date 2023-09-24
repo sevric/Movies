@@ -5,8 +5,9 @@ import com.severin.movies.data.network.RetrofitInstance
 import com.severin.movies.data.network.RetrofitService
 import com.severin.movies.data.database.MoviesRoomDao
 import com.severin.movies.domain.MoviesRepository
+import javax.inject.Inject
 
-class MoviesRepositoryImpl constructor(
+class MoviesRepositoryImpl @Inject constructor(
     private val moviesRoomDao: MoviesRoomDao,
     private val movieApiToDbMapper: MovieApiToDbMapper
 ) : MoviesRepository {

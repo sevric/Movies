@@ -1,6 +1,8 @@
 package com.severin.movies.data.model
 
-class MovieApiToDbMapper {
+import javax.inject.Inject
+
+class MovieApiToDbMapper @Inject constructor() {
     fun mapFromApiToDb(movieItemApi: MovieItemApi): MovieItemDB {
         return MovieItemDB(
             movieItemApi.backdrop_path ?: EMPTY_STRING,

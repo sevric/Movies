@@ -7,8 +7,9 @@ import com.severin.movies.data.model.GenresResponse
 import com.severin.movies.domain.GetGenresListFromApiUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GenresViewModel constructor(
+class GenresViewModel @Inject constructor(
     private val getGenresListFromApiUseCase: GetGenresListFromApiUseCase
 ) : ViewModel() {
     val genresFromApi = MutableLiveData<GenresResponse>()

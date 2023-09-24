@@ -1,6 +1,8 @@
 package com.severin.movies.domain
 
-class GetMoviesByUserSearchQueryUseCase constructor(
+import javax.inject.Inject
+
+class GetMoviesByUserSearchQueryUseCase @Inject constructor(
     private val repository: MoviesRepository
 ) {
     suspend operator fun invoke(queryString: String) =

@@ -1,6 +1,7 @@
 package com.severin.movies.presentation.ui
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.*
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.severin.movies.R
@@ -25,6 +27,7 @@ import com.severin.movies.presentation.vm.MoviesViewModelFactory
 import com.severin.movies.presentation.vm.WatchLaterMoviesViewModel
 import com.severin.movies.utils.ConstantSet
 import com.severin.movies.utils.UtilFunctions
+import javax.inject.Inject
 
 class MovieFragment : Fragment() {
     private var movieId: Int? = null
@@ -32,17 +35,25 @@ class MovieFragment : Fragment() {
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
 
-    private val movieApplicationGlobal: MovieApplicationGlobal by lazy {
-        MovieApplicationGlobal.instance
+    private val component by lazy {
+        (requireActivity().application as MovieApplicationGlobal).component
     }
+
+    @Inject
+    lateinit var viewModelFactory: MoviesViewModelFactory
     private val favouriteMoviesViewModel: FavouriteMoviesViewModel by activityViewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+        viewModelFactory
     }
-    private val watchLaterMoviesViewModel: WatchLaterMoviesViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+    private val watchLaterMoviesViewModel: WatchLaterMoviesViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[WatchLaterMoviesViewModel::class.java]
     }
-    private val movieByIdFromApiViewModel: MovieByIdFromApiViewModel by viewModels {
-        MoviesViewModelFactory(movieApplicationGlobal)
+    private val movieByIdFromApiViewModel: MovieByIdFromApiViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[MovieByIdFromApiViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

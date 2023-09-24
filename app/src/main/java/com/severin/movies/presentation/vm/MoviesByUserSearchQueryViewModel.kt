@@ -6,8 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.severin.movies.data.model.MoviesResponse
 import com.severin.movies.domain.GetMoviesByUserSearchQueryUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MoviesByUserSearchQueryViewModel constructor(
+class MoviesByUserSearchQueryViewModel @Inject constructor(
     private val getMoviesByUserSearchQueryUseCase: GetMoviesByUserSearchQueryUseCase
 ) : ViewModel() {
     val moviesByUserSearchQuery = MutableLiveData<MoviesResponse>()

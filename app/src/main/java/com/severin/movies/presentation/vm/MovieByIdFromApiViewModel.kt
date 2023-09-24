@@ -7,8 +7,9 @@ import com.severin.movies.data.model.MovieItemApi
 import com.severin.movies.domain.GetMovieByIdFromApiUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieByIdFromApiViewModel constructor(
+class MovieByIdFromApiViewModel @Inject constructor(
     private val getMovieByIdFromApiUseCase: GetMovieByIdFromApiUseCase
 ) : ViewModel() {
     val movieById = MutableLiveData<MovieItemApi>()//TODO(brakes Clean Architecture)

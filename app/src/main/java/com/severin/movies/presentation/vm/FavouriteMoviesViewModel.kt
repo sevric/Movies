@@ -9,8 +9,9 @@ import com.severin.movies.data.model.MovieItemDB
 import com.severin.movies.domain.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavouriteMoviesViewModel constructor(
+class FavouriteMoviesViewModel @Inject constructor(
     private val getAllFavouritesFromDBUseCase: GetAllFavouritesFromDBUseCase,
     private val getFavouriteByIdFromDBUseCase: GetFavouriteByIdFromDBUseCase,
     private val getMovieByIdFromDBUseCase: GetMovieByIdFromDBUseCase,
