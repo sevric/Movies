@@ -15,6 +15,9 @@ class OutlinedTextView @JvmOverloads constructor(
 
     private val outlinedTitlePaint: Paint = Paint()
 
+    override fun onDraw(canvas: Canvas) {
+
+    }
     override fun draw(canvas: Canvas) {
 
         val x = ZERO_COORDINATE

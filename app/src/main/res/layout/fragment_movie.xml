@@ -35,8 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:maxLines="1"
-                android:text="@string/movie_default_title"
-                android:textColor="@color/red" />
+                android:text="@string/movie_default_title" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
