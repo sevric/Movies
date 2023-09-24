@@ -99,14 +99,14 @@ class MoviesByUserSearchQueryFragment : Fragment() {
         if (args == null) {
             Toast.makeText(
                 this.requireContext(),
-                NO_QUERY_ENTERED,
+                NO_QUERY_ENTERED_NOTIFICATION,
                 Toast.LENGTH_SHORT
             ).show()//TODO(replace the Toast by an appearing an AlertFragment)
             activity?.supportFragmentManager?.popBackStack()//TODO(make the fragment close and back to the previous frag)
         } else if (!(args.containsKey(QUERY_STRING_PARAM))) {
             Toast.makeText(
                 this.requireContext(),
-                REQUEST_ENTER_QUERY,
+                REQUEST_ENTER_QUERY_NOTIFICATION,
                 Toast.LENGTH_SHORT
             ).show()//TODO(replace the Toast by an appearing an AlertFragment)
             activity?.supportFragmentManager?.popBackStack()
@@ -148,8 +148,8 @@ class MoviesByUserSearchQueryFragment : Fragment() {
 
     companion object {
         private const val QUERY_STRING_PARAM = "query_string_param"
-        private const val NO_QUERY_ENTERED = "No query were entered"
-        private const val REQUEST_ENTER_QUERY = "Enter a query"
+        private const val NO_QUERY_ENTERED_NOTIFICATION = "No query were entered"
+        private const val REQUEST_ENTER_QUERY_NOTIFICATION = "Enter a query"
         private const val SPAN_COUNT_FOR_GRID_ADAPTER = 2
 
         @JvmStatic
