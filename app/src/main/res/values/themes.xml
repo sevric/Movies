@@ -18,4 +18,10 @@
         <!--Turn off Status Bar-->
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <!--Spinner custom styles-->
+    <style name="customSpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="overlapAnchor">true</item>
+    </style>
 </resources>
