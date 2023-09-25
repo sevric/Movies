@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Фільми</string>
+
+    <!--Navigation page titles-->
+    <string name="nav_title_home">Домашня</string>
+    <string name="nav_title_genres">Жанри</string>
+    <string name="nav_title_favourite">Обране</string>
+    <string name="nav_title_account">Акаунт</string>
+
+    <!--Images descriptions-->
+    <string name="description_iv_btn_start_searching">Почати пошук</string>
+    <string name="description_rv_most_popular_movies_list">Список найпопулярніших фільмів</string>
+    <string name="description_rv_movies_by_period">Фільми за обраним періодом</string>
+    <string name="description_rv_movies_for_kids">Кіно для дітей</string>
+    <string name="description_rv_now_in_the_theaters_list">Фільми у кінотеатрах</string>
+    <string name="description_spinner_choose_period">
+        Оберіть період виходу популярних фільмів
+    </string>
+    <string name="description_open_movies_of_this_genre">Показати фільми за цим жанром</string>
+    <string name="description_genre_image">Зображення жанру</string>
+    <string name="description_open_the_movie_info">Показати інформацію про цей фільм</string>
+    <string name="description_movie_poster">Постер фільму</string>
+    <string name="description_btn_add_to_see_later">Клавіша додавання до перегляду пізніше</string>
+    <string name="description_btn_add_to_favorites">Клавіша додавання до обраного</string>
+    <string name="description_btn_trailer_watch">Клавіша пошуку трейлерів на Ютубі</string>
+    <string name="description_btn_register">Клавіша реєстрації за даними, які Ви ввели</string>
+    <string name="description_btn_reset_password">
+        Клавіша переходу до сторінки відновлення паролю по електронній адресі, яку Ви ввели
+    </string>
+    <string name="description_btn_back_to_login">Клавіша повернення до сторінки входу</string>
+    <string name="description_iv_btn_open_personal_page_menu">
+        Відкрити меню особистої інформації
+    </string>
+    
+    <!--Views texts-->
+    <string name="title_part_for_kids">Для дітей</string>
+    <string name="title_part_most_popular">Найпопулярніші</string>
+    <string name="title_part_now_in_the_theaters">Зараз у кінотеатрах</string>
+    <string name="title_start_highlighted_period_spinner">Найкраще за</string>
+    <string name="title_end_highlighted_period_spinner"> </string>
+    <string name="title_genres">Ж А Н Р И</string>
+    <string name="title_favourites">О Б Р А Н Е</string>
+    <string name="btn_login">Вхід</string>
+    <string name="btn_tv_forgot_your_password">Забули пароль?</string>
+    <string name="btn_tv_register">Зареєструватися</string>
+    <string name="movie_default_title">
+        Назва фільму за замовчуванням в дуже-дуже довгій-довгій версії з великою кількістю слів
+    </string>
+    <string name="rating_title">Рейтинг:</string>
+    <string name="rating_default_value">9,9</string>
+    <string name="title_year_of_issue">Дата виходу:</string>
+    <string name="year_of_issue_default_value">2222</string>
+    <string name="title_genre_list">Жанри:</string>
+    <string name="genre_list_default">
+        Драма, комедія, і ще багато жанрів за замовчуванням, ще багато і ще більше
+    </string>
+    <string name="title_overview">Опис:</string>
+    <string name="overview_text_itself_value">Текст опису у дуже-дуже-дуже довгій версії</string>
+    <string name="btn_tv_see_movie_details">Детальніше про фільм…</string>
+    <string name="title_prefix_movies_by_genre">Жанр: </string>
+    <string name="title_default_genre_name">Ім\'я жанру за замовчуванням</string>
+    <string name="title_movies_by_query_text">Кіно за запитом</string>
+    <string name="title_movies_by_query">Кіно за запитом \"%1$s\"</string>
+    <string name="title_forgot_your_password">Забули пароль?</string>
+    <string name="btn_reset_password">Відновити пароль</string>
+    <string name="btn_back_to_login">На сторінку входу</string>
+    <string name="title_watch_later">Фільми, які я бажаю подивитися пізніше </string>
+
+    <!--Hint texts-->
+    <string name="hint_search_field">шукати фільми…</string>
+    <string name="hint_enter_your_email">Введіть ел. адресу</string>
+    <string name="hint_enter_your_password">Введіть пароль</string>
+    <string name="hint_email">Ел. адреса</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_name">Ім\'я</string>
+    <string name="hint_last_name">Прізвище</string>
+    <string name="hint_age">Вік</string>
+    <string name="hint_register">Зареєструватися</string>
+    <string name="hint_enter_email_to_reset_password">
+        Введіть ел. адресу для відновлення паролю
+    </string>
+    
+    <!--Spinner list-->
+    <string name="spinner_option_month">місяць</string>
+    <string name="spinner_option_week">тиждень</string>
+    <string name="spinner_option_year">рік</string>
+</resources>
