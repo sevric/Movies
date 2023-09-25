@@ -12,9 +12,7 @@
     <string name="description_rv_most_popular_movies_list">Most popular movies list</string>
     <string name="description_rv_movies_by_period">Movies by chosen period</string>
     <string name="description_rv_movies_for_kids">Movies for kids</string>
-    <string name="description_rv_now_in_the_theaters_list">
-        Movies in the theaters now
-    </string>
+    <string name="description_rv_now_in_the_theaters_list">Movies in the theaters now</string>
     <string name="description_spinner_choose_period">
         Choose period of recent popular movies
     </string>
